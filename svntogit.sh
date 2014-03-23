@@ -2,7 +2,7 @@
 function getusers {
   echo "" > svntogit/authors.txt
   echo "svntogit/authors.txt file created"
-  authors=$(svn log -q | grep -e '^r' | awk 'BEGIN { FS = "|" } ; { print $2 }' | sort | uniq)
+  authors=$(svn log -q $repo | grep -e '^r' | awk 'BEGIN { FS = "|" } ; { print $2 }' | sort | uniq)
   for author in ${authors}; do
     echo "${author} = ${author} <${author}@${host}.com>" >> svntogit/authors.txt;
   done
