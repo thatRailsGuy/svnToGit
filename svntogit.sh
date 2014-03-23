@@ -10,7 +10,7 @@ function getusers {
 }
 
 function getinfo {
-  read -p "Please enter the default email host and press enter: " host
+  read -p "Please enter the default email host (e.g. gmail) and press enter: " host
   read -p "Please enter the project name and press enter: " name
   # Get repo info
   read -p "Please enter the svn repo and press enter (one level up from trunk): " repo

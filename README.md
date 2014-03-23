@@ -7,7 +7,7 @@ To use this script, run from a terminal.
 
 Variables to enter include:
 
-* host - default email
+* host - default email host, e.g. gmail
 * name - the project folder will besa created using thing this
 * repo - the repo containing the trunk, branches, and tags for the repo
 * tags - the folder containing tags within the repo
