@@ -15,11 +15,11 @@ function getinfo {
   # Get repo info
   read -p "Please enter the svn repo and press enter (one level up from trunk): " repo
   # get git info
-  read -p "Please enter the git repo (https://USERNAME@bitbucket.org/[team]/PROJECT.git) and press enter:" gitrepo
+  read -p "Please enter the git repo and press enter:" gitrepo
   # get names of folders in svn
-  read -p "Please enter the tags folder (or leave blank for tags) and press enter: " tags
-  read -p "Please enter the branches folder (or leave blank for branches) and press enter: " branches
-  read -p "Please enter the trunk folder (or leave blank for trunk) and press enter: " trunk
+  read -p "Please enter the tags folder (or leave blank to default to \"tags\") and press enter: " tags
+  read -p "Please enter the branches folder (or leave blank to default to \"branches\") and press enter: " branches
+  read -p "Please enter the trunk folder (or leave blank to default to \"trunk\") and press enter: " trunk
 }
 
 mkdir -p svntogit
