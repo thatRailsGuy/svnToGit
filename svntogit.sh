@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
-# Run inside checked out svn project
 function getusers {
   echo "" > $HOME/svntogit/authors.txt
   echo "$HOME/svntogit/authors.txt file created"
-  read -p "Please enter the default email host and press enter: " host
   authors=$(svn log -q | grep -e '^r' | awk 'BEGIN { FS = "|" } ; { print $2 }' | sort | uniq)
   for author in ${authors}; do
     echo "${author} = ${author} <${author}@${host}.com>" >> $HOME/svntogit/authors.txt;
@@ -12,6 +10,7 @@ function getusers {
 }
 
 function getinfo {
+  read -p "Please enter the default email host and press enter: " host
   read -p "Please enter the project name and press enter: " name
   # Get repo info
   read -p "Please enter the svn repo and press enter (one level up from trunk): " repo
@@ -27,6 +26,8 @@ function getinfo {
 mkdir -p $HOME/svntogit
 echo "made directory $HOME/svntogit"
 
+# Gather info
+getinfo
 # Create user file
 getusers
 
@@ -36,9 +37,6 @@ echo \"\$1 = \$1 <\$1@${host}.com>\";" > $HOME/svntogit/svn-unknown-author.sh
 echo "$HOME/svntogit/svn-unknown-author.sh file written"
 chmod 755 $HOME/svntogit/svn-unknown-author.sh
 cd ..
-
-# Gather info
-getinfo
 
 # Execute git svn transfer
 git svn clone --tags ${tags:=tags} --trunk ${trunk:=trunk} --branches ${branches:=branches} --authors-prog=$HOME/svntogit/svn-unknown-author.sh --no-metadata -A $HOME/svntogit/authors.txt $repo $name-temp
