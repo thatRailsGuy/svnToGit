@@ -20,7 +20,6 @@ function getinfo {
   read -p "Please enter the tags folder (or leave blank for tags) and press enter: " tags
   read -p "Please enter the branches folder (or leave blank for branches) and press enter: " branches
   read -p "Please enter the trunk folder (or leave blank for trunk) and press enter: " trunk
-
 }
 
 mkdir -p svntogit
@@ -36,7 +35,6 @@ echo "#!/usr/bin/env bash
 echo \"\$1 = \$1 <\$1@${host}.com>\";" > svntogit/svn-unknown-author.sh
 echo "svntogit/svn-unknown-author.sh file written"
 chmod 755 svntogit/svn-unknown-author.sh
-cd ..
 
 # Execute git svn transfer
 git svn clone --tags ${tags:=tags} --trunk ${trunk:=trunk} --branches ${branches:=branches} --authors-prog=svntogit/svn-unknown-author.sh --no-metadata -A svntogit/authors.txt $repo $name-temp
@@ -75,5 +73,7 @@ git push -u origin --all
 git push origin --tags
 git checkout master
 
+#cleanup
 cd ..
 rm -rf $name-temp
+rm -rf svntogit
