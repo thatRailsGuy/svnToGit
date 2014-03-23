@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 function getusers {
-  echo "" > $HOME/svntogit/authors.txt
-  echo "$HOME/svntogit/authors.txt file created"
+  echo "" > svntogit/authors.txt
+  echo "svntogit/authors.txt file created"
   authors=$(svn log -q | grep -e '^r' | awk 'BEGIN { FS = "|" } ; { print $2 }' | sort | uniq)
   for author in ${authors}; do
-    echo "${author} = ${author} <${author}@${host}.com>" >> $HOME/svntogit/authors.txt;
+    echo "${author} = ${author} <${author}@${host}.com>" >> svntogit/authors.txt;
   done
-  echo "$HOME/svntogit/authors.txt file written"
+  echo "svntogit/authors.txt file written"
 }
 
 function getinfo {
@@ -23,8 +23,8 @@ function getinfo {
 
 }
 
-mkdir -p $HOME/svntogit
-echo "made directory $HOME/svntogit"
+mkdir -p svntogit
+echo "made directory svntogit"
 
 # Gather info
 getinfo
@@ -33,13 +33,13 @@ getusers
 
 # Create script in case author not found
 echo "#!/usr/bin/env bash
-echo \"\$1 = \$1 <\$1@${host}.com>\";" > $HOME/svntogit/svn-unknown-author.sh
-echo "$HOME/svntogit/svn-unknown-author.sh file written"
-chmod 755 $HOME/svntogit/svn-unknown-author.sh
+echo \"\$1 = \$1 <\$1@${host}.com>\";" > svntogit/svn-unknown-author.sh
+echo "svntogit/svn-unknown-author.sh file written"
+chmod 755 svntogit/svn-unknown-author.sh
 cd ..
 
 # Execute git svn transfer
-git svn clone --tags ${tags:=tags} --trunk ${trunk:=trunk} --branches ${branches:=branches} --authors-prog=$HOME/svntogit/svn-unknown-author.sh --no-metadata -A $HOME/svntogit/authors.txt $repo $name-temp
+git svn clone --tags ${tags:=tags} --trunk ${trunk:=trunk} --branches ${branches:=branches} --authors-prog=svntogit/svn-unknown-author.sh --no-metadata -A svntogit/authors.txt $repo $name-temp
 
 # Create branches and tags
 cd $name-temp
