@@ -4,7 +4,11 @@ function getusers {
   echo "svntogit/authors.txt file created"
   authors=$(svn log -q $repo | grep -e '^r' | awk 'BEGIN { FS = "|" } ; { print $2 }' | sort | uniq)
   for author in ${authors}; do
-    echo "${author} = ${author} <${author}@${host}.com>" >> svntogit/authors.txt;
+    local author_name
+    local author_email
+    read -p "Please enter the full name of user ${author} and press enter: " author_name
+    read -p "Please enter the email address of user ${author} (or leave blank to default to \"${author}@${host}.com\") and press enter: " author_email
+    echo "${author} = ${author_name:=$author} <${author_email:=${author}@${host}.com}>" >> svntogit/authors.txt;
   done
   echo "svntogit/authors.txt file written"
 }
