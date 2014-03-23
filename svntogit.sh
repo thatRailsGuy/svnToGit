@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+# Written by Clinton Cecil
+# see https://github.com/thatRailsGuy/svnToGit for documentation
 function getusers {
   echo "" > svntogit/authors.txt
   echo "svntogit/authors.txt file created"
