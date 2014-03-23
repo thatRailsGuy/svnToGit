@@ -19,3 +19,5 @@ For more info, see:
 * http://john.albin.net/git/convert-subversion-to-git
 * http://stackoverflow.com/questions/79165/how-to-migrate-svn-with-history-to-a-new-git-repository
 * https://www.atlassian.com/git/migration
+* http://jmoses.co/2014/03/21/moving-from-svn-to-git.html
+* http://svnrating.com/svn-to-git-migration/
